@@ -14,7 +14,9 @@
 %% Подключаем основные пакеты
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\RequirePackage{cmap} % Правильная кодировка символов в PDF
+\input{glyphtounicode.tex} % Правильная кодировка символов в PDF
+\pdfgentounicode=1
+%\RequirePackage{cmap} % Правильная кодировка символов в PDF
 \RequirePackage[T2A]{fontenc} % Внутренняя кодировка TeX-а
 \RequirePackage[cp1251]{inputenc} % Кодировка файла
 \RequirePackage[english,russian]{babel} % Русификация, таблица переносов и т.п.
@@ -210,8 +212,9 @@
 	%\@ifpackageloaded{hyperref}{}{}
 	%\thispagestyle{empty}
 	\begin{center}
-	  \small \textsc{\@LetterHead}\\[0.5\baselineskip]
-	  \textsc{\@Kafedra}\\
+	  %\small 
+	  {\@LetterHead}\\[0.5\baselineskip]
+	  {\@Kafedra}\\
 	\end{center}
 	\ifkursovaya
 		\vfill
