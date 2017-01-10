@@ -1,16 +1,19 @@
 \documentclass[a4paper,12pt]{diplom}
 \inputencoding{cp1251} % Кодировка вашего файла
+\usepackage{paratype} % Шрифты 
 \usepackage[left=3cm,right=2cm,top=2cm,bottom=2cm]{geometry} % Размеры полей
 \usepackage[onehalfspacing]{setspace} % Полуторный интервал
 %\renewcommand{\baselinestretch}{1.25} % Полуторный интервал
 \usepackage{indentfirst} % Абзацный отступ в начале разделов
 \setlength{\parindent}{1.25cm} % Величина абзацного отступа
 
-\usepackage{paratype} % Шрифты 
 \usepackage[pdftex]{graphicx} % Для вставки изображений
 \usepackage{array} % Для таблиц
 \usepackage{booktabs} % Для красивых таблиц 
 \usepackage{tikz} % Рисунки с помощью TikZ
+\usepackage[linesnumbered,lined,ruled]{algorithm2e} % Для оформления псевдокода
+%\usepackage{algorithm} % Альтернатива оформления псевдокода
+%\usepackage{algpseudocode} % Альтернатива оформления псевдокода
 \usepackage{listings} % Оформление листингов программ
 \usepackage{icomma} % Удаляем тонкий пробел после запятой в мат. режиме
 
@@ -215,7 +218,7 @@
 Вероятность события $A$ при условии, что событие~$B$ произошло:
 $\Pb{A \given B}$.
 
-Вот так выглядит $n\times k$"~матрица:
+Вот так выглядит $(n\times k)$"~матрица:
 \begin{equation}
 M = \begin{pmatrix}
 	m_{11} & m_{12} & \dots & m_{1k} \\
@@ -229,6 +232,7 @@ M = \begin{pmatrix}
 	% номер формулы не будет напечатан
 \end{equation}
 
+
 \chapter{Рисуем с помощью TikZ}
 
 Пакет Ti\textit{k}Z предлагает удобные инструменты для рисования диаграмм, блок"=схем, графов, графиков функций и~т.\,п~\cite{tikz, Kirutenko:2014}.
@@ -239,25 +243,26 @@ M = \begin{pmatrix}
 \usetikzlibrary{positioning} % Для конструкции right = of ...
 \usetikzlibrary{arrows.spaced} % Для stealth'
 \usetikzlibrary{calc} % Для $(...)!.5!(...)$
+\usetikzlibrary{shapes.geometric} % Для diamond
 
 \begin{figure}[ht]
 	\begin{minipage}[b]{0.40\textwidth}
 		\centering
 		\begin{tikzpicture}[rect/.style={rectangle, thick, draw=black}, node distance=15mm and 10mm]
-		\node (source) [rect, align=center] {Источник\\ данных};
+		\node (source) [draw=black, shape=diamond, shape aspect = 2, align=center] {Источник\\ данных};
 		\node (result) [rect, rounded corners, right = of source] {Результат};
-		\draw[->, >=stealth'] (source) to[bend left] (result);
+		\draw[->, >=stealth'] (source.north) to[bend left] (result);
 		\node (C1) at ($(source.east)!.5!(result.west)$) {};
-		\node (user) [rect, rounded corners, below = of C1] {Наблюдатель};
-		\draw[->, >=stealth'] (user) to (source);
+		\node (user) [draw=black, ellipse, below = of C1] {Наблюдатель};
+		\draw[->, >=stealth'] (user.west) -| (source.south);
 		\draw[<->, >=stealth'] (user) to (result);
 		\end{tikzpicture}
 		\caption{Блок-схема}\label{fig:block}
 	\end{minipage}
 	%
-	\hfil\hfil% раздвигаем боксы по горизонтали
+	\hfill% раздвигаем боксы по горизонтали
 	%
-	\begin{minipage}[b]{0.55\textwidth}
+	\begin{minipage}[b]{0.54\textwidth}
 		\centering
 		\begin{tikzpicture}[scale=1.0, >=stealth']
 		%\draw[help lines] (-3.4,-1.3) grid[step=1.0] (3.8,1.3);
@@ -272,6 +277,64 @@ M = \begin{pmatrix}
 		\label{fig:sin}
 	\end{minipage}
 \end{figure}
+
+\chapter{Псевдокод}
+
+Пакет \href{https://www.ctan.org/pkg/algorithm2e}{algorithm2e}
+предлагает широкий спектр инструментов для создания и оформления псевдокода.
+Также имеется возможность делать ссылки на строки кода.
+Например, в строке~\ref{alg:lDoWhile} алгоритма~\ref{alg:quicksort}
+целиком содержится цикл типа \texttt{do-while}.
+
+\SetAlgorithmName{Алгоритм}{Список алгоритмов}{} % Название на русском
+\SetAlgoCaptionSeparator{.} % Отделяем название алгоритма от его номера точкой
+%\SetAlgoLined % Вертикальные линии, соединяющие начало и конец блока
+\DontPrintSemicolon % Не печатать точку с запятой
+\SetKwProg{Proc}{Procedure}{}{end} % Команда для процедуры
+\SetKwProg{Fn}{Function}{}{end} % Команда для функции
+% Описание входных и выходных данных
+\SetKwInOut{Input}{Вход}
+\SetKwInOut{Output}{Выход}
+\SetKwRepeat{DoWhile}{do}{while} % Создаем цикл do-while
+\SetKwBlock{Loop}{loop}{endloop} % Безусловный цикл
+\begin{algorithm}
+	\caption{Быстрая сортировка} % Заголовок
+	\label{alg:quicksort}
+	% Обозначения ключевых (входных-выходных) данных алгоритма
+	\SetKwArray{Array}{A} % Массив
+	\SetKwData{Low}{b}
+	\SetKwData{High}{e}
+	% Названия новых процедур и функций
+	\SetKwFunction{QuickSort}{QuickSort}
+	\SetKwFunction{Partition}{Partition}
+	% Описание входа-выхода
+	\Input{ массив \Array, индексы начала \Low и конца \High сортируемого фрагмента}
+	\Output{ массив \Array, отсортированный по возрастанию}
+	\BlankLine
+	% Непосредственно процедура QuickSort
+	\Proc{\QuickSort{\Array, \Low, \High}}{
+		\If{$\Low < \High$}{
+			$m \leftarrow$ \Partition{\Array, \Low, \High}\;
+			\QuickSort{\Array, \Low, $m$}\;
+			\QuickSort{\Array, $m+1$, \High}\;
+		}
+	}
+	\BlankLine
+	% Функция Partition
+	\Fn{\Partition{\Array, \Low, \High}}{
+		$v \leftarrow$ \Array{\Low}\;
+		$i \gets \Low - 1$\;
+		$j \gets \High + 1$\;
+		\Loop{
+			\DoWhile{$\Array{$i$} < v$}{
+				$i \gets i + 1$\;
+			}
+			\lDoWhile{$\Array{$j$} > v$}{$j \gets j - 1$} \label{alg:lDoWhile}
+			\If{$i \ge j$}{\Return{$j$}\;}
+			поменять местами \Array{$i$} и \Array{$j$}\;
+		}
+	}
+\end{algorithm}
 
 
 \chapternonum{Заключение}
@@ -354,11 +417,11 @@ M = \begin{pmatrix}
 	extendedchars=true, % используем неанглийские буквы
 	basicstyle=\ttfamily, % базовый стиль
 %	keywordstyle=\bfseries, % стиль ключевых слов (попробуйте \pmb если \bfseries не работает)
-%	commentstyle=\itshape, % стиль для комментариев
+	commentstyle=\rmfamily\itshape, % стиль для комментариев
 	stringstyle=\slshape, % стиль строк в кавычках
 	numbers=left, % где проставляем номера строк; возможные значения: none, left, right
 	numbersep=1em, % расстояние (по горизонтали) от номеров строк до кода
-	stepnumber=2, % шаг отображения номеров строк. Если 1, то каждая строка помечается номером
+	stepnumber=1, % шаг отображения номеров строк. Если 1, то каждая строка помечается номером
 	numberstyle=\footnotesize\color{black}, % стиль для номеров строк
 }
 
@@ -367,7 +430,8 @@ M = \begin{pmatrix}
 
 % Настраиваем оформление листинга для C++
 \lstdefinestyle{cpp}{
-	language=[ANSI]C++
+	language=[ANSI]C++,
+	morekeywords={string, list} % расширяем список ключевых слов
 }
 
 % Загружаем код из файла
@@ -387,21 +451,46 @@ M = \begin{pmatrix}
 % Для этого используем редкие для языка комбинации символов
 \lstset{escapeinside={|@}{@|}}
 
-Пример метки на строку~\ref{lst:1} с условием \texttt{abs(B[i] - mid) < less}.
+Пример кода на Python 3 (взят с \href{http://python3.codes/alan-turings-automatic-machine/}{официального сайта}), реализующий симулятор машины Тьюринга для сложения унарных чисел (типа $11 + 111$).
+Листинг позволяет делать (автоматическую) ссылку на какую"=нибудь строку. Например, на строку~\ref{lst:1} с командой \texttt{print(tape)}.
 
 % Листинг кода на Python
+%# Turing Machine simulator to add unary numbers (e.g. 11 + 111)
+%#
 \begin{lstlisting}[style=Python]
-# Преобразование
-s = 0
-for i in range(N):
-	s += B[i]
-mid = s / N
-# Выборка согласно условию
-less, k = abs(B[0] - mid), 0
-for i in range(N):
-	if abs(B[i] - mid) < less: |@\label{lst:1}@|
-		less, k = abs(B[i] - mid), i
+# prog is indexed by the current tape symbol (0 or 1) 
+# and then by state (a kind of instruction pointer) 
+# to get an 'instruction' comprising:
+#   symbol to write on current tape position,
+#   head action (-1 = move left, +1 = move right)
+#   next state (like a goto jump).
+
+#       symbol 0    symbol 1
+prog = [[(1, +1, 1), (1, +1, 0)],         # state 0
+		[(0, -1, 2), (1, +1, 1)],         # state 1
+		[(0, +1, 2), (0, +1, 9)]]         # state 2
+tape = [1,1,0,1,1,1,0,0,0]                # The data tape
+head = 0                                  # head position on tape
+state = 0                                 # instruction pointer
+print(tape)  |@\label{lst:1}@|
+while state != 9:                         # while not halt:
+	symbol = tape[head]                   # read current tape symbol
+	symbol, dir, state = t = prog[state][symbol] # lookup instruction
+	print(' ' * (head * 3 + 1)+ '^  ' + str(t)) # display progress
+	tape[head] = symbol                   # write new symbol on tape
+	print(tape)
+	head = head + dir                           # move tape head
 \end{lstlisting}
 
 
 \end{document}
+# Преобразование
+s = 0
+for i in range(N):
+s += B[i]
+mid = s / N
+# Выборка согласно условию
+less, k = abs(B[0] - mid), 0
+for i in range(N):
+if abs(B[i] - mid) < less: |@\label{lst:1}@|
+less, k = abs(B[i] - mid), i

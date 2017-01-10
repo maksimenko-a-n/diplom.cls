@@ -16,7 +16,7 @@
 
 \input{glyphtounicode.tex} % Правильная кодировка символов в PDF
 \pdfgentounicode=1
-%\RequirePackage{cmap} % Правильная кодировка символов в PDF
+%\RequirePackage{cmap} % Правильная кодировка символов в PDF (устар.)
 \RequirePackage[T2A]{fontenc} % Внутренняя кодировка TeX-а
 \RequirePackage[cp1251]{inputenc} % Кодировка файла
 \RequirePackage[english,russian]{babel} % Русификация, таблица переносов и т.п.
