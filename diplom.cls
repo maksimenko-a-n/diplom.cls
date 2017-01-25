@@ -6,7 +6,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{diplom}[2016/10/20 Provides the format for diploms]
+\ProvidesClass{diplom}[2017/01/25 Provides the format for diploms]
 % Загружаем report.cls со всеми опциями, переданными в diplom
 \LoadClassWithOptions{report} 
 
@@ -25,27 +25,38 @@
 %% Настраиваем стиль заголовков
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\RequirePackage[dotinlabels]{titletoc} % Точки в номерах разделов в содержании
+\RequirePackage[dotinlabels]{titletoc} % Точки в номерах разделов в содержании
 \RequirePackage[newlinetospace]{titlesec} % Опция newlinetospace заменяет \\ на пробелы в содержании
 %\titlelabel{\thetitle.\quad} % Точки в номерах разделов
+\newcommand{\TitleLabelWidth}{2cm} % Размер места под номер заголовка (заранее не известен)
 \titleformat{\chapter}[hang]{%
-	\filcenter\normalfont\Large\bfseries% The format of the whole title: label and text
+	\filright\normalfont\Large\bfseries% The format of the whole title: label and text
 	}{\stepcounter{chapternum}% Увеличиваем независимый счетчик глав
-		\chaptertitlename\ \thechapter.% The label
-	}{1em}{}
-% The standart definition of the chapter title format
-%\titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter.}{20pt}{\Huge}
-\titleformat{\section}[hang]{%
-	\normalfont\large\bfseries% The format of the whole title: label and text
-	}{\thesection.\ % The label
-	}{1em}{}
-\titleformat{\subsection}[hang]{%
-	\normalfont\bfseries% The format of the whole title: label and text
-	}{\thesubsection.% The label
-	}{1em}{}
-\titlespacing{\chapter}{0pt}{*3.5}{*3.5}
-\titlespacing{\section}{0pt}{\beforetitleunit}{\aftertitleunit}
-\titlespacing{\subsection}{0pt}{\beforetitleunit}{\aftertitleunit}
+	\makebox[\TitleLabelWidth][l]{\thechapter.}% The label
+	}{0em}{}
+\titleformat{\section}
+{\normalfont\large\bfseries}{\makebox[\TitleLabelWidth][l]{\thesection.}}{0em}{}
+\titleformat{\subsection}
+{\normalfont\normalsize\bfseries}{\makebox[\TitleLabelWidth][l]{\thesubsection.}}{0em}{}
+\titleformat{\subsubsection}
+{\normalfont\normalsize\bfseries}{\makebox[\TitleLabelWidth][l]{\thesubsubsection.}}{0em}{}
+
+% The standart definition of chapter and sections title format
+%\titleformat{\chapter}[display]
+%{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter.}{20pt}{\Huge}
+%\titleformat{\section}
+%{\normalfont\Large\bfseries}{\thesection}{1em}{}
+%\titleformat{\subsection}
+%{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+%\titleformat{\subsubsection}
+%{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+% \makebox[2cm][l]{\thetitle.} делает номер фиксированной ширины
+%\titlelabel{\makebox[2cm][l]{\thetitle.}}
+\titlespacing{\chapter}{0pt}{1em}{*3.5} % Вертикальные отбивки вокруг заголовка
+%\titlespacing{\section}{0pt}{1em}{\aftertitleunit}
+%\titlespacing{\subsection}{0pt}{1em}{\aftertitleunit}
+%\titlespacing{\subsubsection}{0pt}{1em}{\aftertitleunit}
 
 % Создаем команду для ненумерованной главы
 \newcommand*{\chapternonum}[1]{\chapter*{#1}\addcontentsline{toc}{chapter}{#1}}
@@ -54,8 +65,10 @@
 %% Стиль заголовков в приложениях
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%\usepackage[titletoc]{appendix}% http://ctan.org/pkg/appendices
+
 \AtBeginDocument{\let\oldappendix=\appendix
-	\renewcommand{\appendix}{%
+	\def\appendix{%
 		%\setcounter{chapternum}{\value{chapter}}
 		\oldappendix
 		% Нумерация приложений русскими буквами
@@ -65,8 +78,19 @@
 		{\normalfont\Large\bfseries% The format of label and text
 		}{\stepcounter{appnum}% Увеличиваем независимый счетчик приложений
 		\filleft\normalfont\Large\chaptertitlename\ \thechapter% The label
-		}{0pt}{\filcenter}
+		}{0pt}{\filright}
 		\titlespacing{\chapter}{0pt}{0pt}{*3.5}
+		% Добавляем слово Приложение к записям глав в Содержании
+		\titlecontents{chapter}% <section-type>
+			[0pt]% <left>
+			{\vspace{1em}\bfseries}% <above-code>
+			{\appendixname\ \thecontentslabel.\enspace}% <numbered-entry-format>
+			{}% <numberless-entry-format>
+			{\hfill\contentspage}% <filler-page-format>
+			%[\vspace{2pt}]% <below-code>
+		% Добавляем слово Приложение к каждой записи в Содержании
+%		\let\addcontentslineold=\addcontentsline
+%		\renewcommand{\addcontentsline}[3]{\addcontentslineold{##1}{##2}{\appendixname~##3}}
 	}
 }
 
@@ -175,9 +199,9 @@
 \Kafedra{Кафедра теоретической информатики}
 \ZavStatus{Заведующий кафедрой,\\ д.\,ф.-м.\,н., профессор}
 \ZavName{С.\,С.~Сидоров}
-\DocumentType{Выпускная квалификационная работа бакалавра}
-\Napr{02.03.02 Фундаментальная информатика и информационные технологии}
-\Title{Название дипломной работы}
+\DocumentType{\large Выпускная квалификационная работа бакалавра}
+\Title{\Large\bfseries Название дипломной работы}
+\Napr{по направлению\\ 02.03.02 Фундаментальная информатика и информационные технологии}
 \ChiefStatus{Научный руководитель\\ к.\,ф.-м.\,н., доцент}
 \ChiefName{П.\,П.~Петров}
 \AuthorStatus{Студент группы ИТ-41БО}
@@ -234,10 +258,16 @@
 			\hrulefill\ \@ChairName%
 		}
 	\fi  
-	\begin{center}
-	    {\large \@DocumentType}\\[\baselineskip]
-	    {\large \textbf{\@Title}}\\[\baselineskip]
-	    {\small\footnotesize по направлению \@Napr}\\[\baselineskip]
+	\begin{center} % Пустые строки нужны для того, чтобы при переключении шрифта изменились межстрочные интервалы
+	    {\@DocumentType
+	    
+	    }\vspace{\baselineskip}
+		{\@Title
+	
+		}\vspace{\baselineskip}
+		{\@Napr
+		
+		}%\vspace{\baselineskip}
 	\end{center}
 	\StandardSign{\@ChiefStatus}{\@ChiefName}
 	\StandardSign{\@AuthorStatus}{\@AuthorName}
