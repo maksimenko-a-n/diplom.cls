@@ -29,15 +29,23 @@
 \RequirePackage[newlinetospace]{titlesec} % Опция newlinetospace заменяет \\ на пробелы в содержании
 %\titlelabel{\thetitle.\quad} % Точки в номерах разделов
 \titleformat{\chapter}[hang]{%
-	\filcenter\normalfont\LARGE\bfseries% The format of the whole title: label and text
+	\filcenter\normalfont\Large\bfseries% The format of the whole title: label and text
 	}{\stepcounter{chapternum}% Увеличиваем независимый счетчик глав
-	\thechapter% The label
+		\chaptertitlename\ \thechapter.% The label
 	}{1em}{}
 % The standart definition of the chapter title format
 %\titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter.}{20pt}{\Huge}
+\titleformat{\section}[hang]{%
+	\normalfont\large\bfseries% The format of the whole title: label and text
+	}{\thesection.\ % The label
+	}{1em}{}
+\titleformat{\subsection}[hang]{%
+	\normalfont\bfseries% The format of the whole title: label and text
+	}{\thesubsection.% The label
+	}{1em}{}
 \titlespacing{\chapter}{0pt}{*3.5}{*3.5}
-\titlespacing{\section}{\parindent}{\beforetitleunit}{\aftertitleunit}
-\titlespacing{\subsection}{\parindent}{\beforetitleunit}{\aftertitleunit}
+\titlespacing{\section}{0pt}{\beforetitleunit}{\aftertitleunit}
+\titlespacing{\subsection}{0pt}{\beforetitleunit}{\aftertitleunit}
 
 % Создаем команду для ненумерованной главы
 \newcommand*{\chapternonum}[1]{\chapter*{#1}\addcontentsline{toc}{chapter}{#1}}
@@ -54,7 +62,7 @@
 		\renewcommand{\thechapter}{\Asbuk{chapter}}
 		% Оформление заголовка приложения
 		\titleformat{\chapter}[display]%
-		{\normalfont\LARGE\bfseries% The format of label and text
+		{\normalfont\Large\bfseries% The format of label and text
 		}{\stepcounter{appnum}% Увеличиваем независимый счетчик приложений
 		\filleft\normalfont\Large\chaptertitlename\ \thechapter% The label
 		}{0pt}{\filcenter}
@@ -145,6 +153,7 @@
 \newcommand*{\ZavKaf}[2]{\gdef\@ChairStatus{#1}\gdef\@ChairName{#2}}
 \newcommand*{\OverTitle}[1]{\gdef\@DocumentType{#1}}
 \newcommand*{\DocumentType}[1]{\gdef\@DocumentType{#1}}
+\newcommand*{\Napr}[1]{\gdef\@Napr{#1}}
 \newcommand*{\Title}[1]{\gdef\@Title{#1}}
 \newcommand*{\AuthorName}[1]{\gdef\@AuthorName{#1}}
 \newcommand*{\AuthorStatus}[1]{\gdef\@AuthorStatus{#1}}
@@ -166,8 +175,8 @@
 \Kafedra{Кафедра теоретической информатики}
 \ZavStatus{Заведующий кафедрой,\\ д.\,ф.-м.\,н., профессор}
 \ZavName{С.\,С.~Сидоров}
-\DocumentType{\textbf{Выпускная работа бакалавра}\\
-	по направлению 010400.62 Информационные технологии}
+\DocumentType{Выпускная квалификационная работа бакалавра}
+\Napr{02.03.02 Фундаментальная информатика и информационные технологии}
 \Title{Название дипломной работы}
 \ChiefStatus{Научный руководитель\\ к.\,ф.-м.\,н., доцент}
 \ChiefName{П.\,П.~Петров}
@@ -226,8 +235,9 @@
 		}
 	\fi  
 	\begin{center}
-	    \large \@DocumentType\\[\baselineskip]
-	    \LARGE \textbf{\@Title}\\[\baselineskip]
+	    {\large \@DocumentType}\\[\baselineskip]
+	    {\large \textbf{\@Title}}\\[\baselineskip]
+	    {\small\footnotesize по направлению \@Napr}\\[\baselineskip]
 	\end{center}
 	\StandardSign{\@ChiefStatus}{\@ChiefName}
 	\StandardSign{\@AuthorStatus}{\@AuthorName}
