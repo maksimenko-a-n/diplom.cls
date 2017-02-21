@@ -110,7 +110,9 @@
 Во введении обосновывается актуальность выбранной темы,
 описываются объект и~предмет исследования, цели и~задачи, методы исследования и~приводится краткое описание структуры работы.
 
-\chapter{Структура выпускной\\ квалификационной работы}
+% Если исходное название содержит специальные символы (например, \\),
+% то в квадратных скобках пишем упрощенный вариант названия для "Содержания".
+\chapter[Структура выпускной квалификационной работы]{Структура выпускной\\ квалификационной работы}
 
 Выпускная квалификационная работа включает следующие структурные элементы:
 \begin{enumerate}[label=\arabic{enumi})]
@@ -417,7 +419,6 @@ M = \begin{pmatrix}
 
 % Приложения
 \appendix
-%\begin{appendices}
 	
 % Настраиваем общее для всех языков оформление листинга
 \lstset{
@@ -437,10 +438,6 @@ M = \begin{pmatrix}
 	numberstyle=\footnotesize\color{black}, % стиль для номеров строк
 }
 
-%\titlecontents{chapter}{\bf}
-%{\appendixname~\thecontentslabel.}%\contentslabel{-1em}}
-%{\hspace*{-5em}}
-%{\hfill\contentspage}
 
 \chapter{Исходный код программы на C++}
 \label{app:source}
@@ -454,52 +451,9 @@ M = \begin{pmatrix}
 % Загружаем код из файла
 \lstinputlisting[style=cpp]{sort.cpp} 
 
+% Части вашего текста можно хранить в отдельных файлах (это особенно удобно для приложений) и включать их в основной файл с помощью команды \input{имя файла}
+\input{appendix2}
 
-\chapter{Исходный код программы на Python}
-\label{app:Python}
-
-% Настраиваем оформление листинга для Python
-\lstdefinestyle{Python}{
-	language=Python,
-	morekeywords={models, lambda, forms, self} % расширяем список ключевых слов
-}
-
-% Определяем ограничители для ввода меток на строки кода
-% Для этого используем редкие для языка комбинации символов
-\lstset{escapeinside={|@}{@|}}
-
-Пример кода на Python 3 (взят с \href{http://python3.codes/alan-turings-automatic-machine/}{официального сайта}), реализующий симулятор машины Тьюринга для сложения унарных чисел (типа $11 + 111$).
-Листинг позволяет делать (автоматическую) ссылку на какую"=нибудь строку. Например, на строку~\ref{lst:1} с командой \texttt{print(tape)}.
-
-% Листинг кода на Python
-%# Turing Machine simulator to add unary numbers (e.g. 11 + 111)
-%#
-\begin{lstlisting}[style=Python]
-# prog is indexed by the current tape symbol (0 or 1) 
-# and then by state (a kind of instruction pointer) 
-# to get an 'instruction' comprising:
-#   symbol to write on current tape position,
-#   head action (-1 = move left, +1 = move right)
-#   next state (like a goto jump).
-
-#       symbol 0    symbol 1
-prog = [[(1, +1, 1), (1, +1, 0)],         # state 0
-		[(0, -1, 2), (1, +1, 1)],         # state 1
-		[(0, +1, 2), (0, +1, 9)]]         # state 2
-tape = [1,1,0,1,1,1,0,0,0]                # The data tape
-head = 0                                  # head position on tape
-state = 0                                 # instruction pointer
-print(tape)  |@\label{lst:1}@|
-while state != 9:                         # while not halt:
-	symbol = tape[head]                   # read current tape symbol
-	symbol, dir, state = t = prog[state][symbol] # lookup instruction
-	print(' ' * (head * 3 + 1)+ '^  ' + str(t)) # display progress
-	tape[head] = symbol                   # write new symbol on tape
-	print(tape)
-	head = head + dir                           # move tape head
-\end{lstlisting}
-
-%\end{appendices}
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 % Конец документа

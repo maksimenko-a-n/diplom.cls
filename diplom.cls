@@ -65,7 +65,8 @@
 %% Стиль заголовков в приложениях
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\usepackage[titletoc]{appendix}% http://ctan.org/pkg/appendices
+% Пакет appendix глючит в некоторых конфигурациях
+%\usepackage[titletoc]{appendix}
 
 \AtBeginDocument{\let\oldappendix=\appendix
 	\def\appendix{%
