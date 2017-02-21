@@ -58,3 +58,11 @@ http://blog.harrix.org/wp-content/uploads/2013/01/russian_english.zip
 выбираем путь к каталогу с только что распакованным словарем (c:\Program Files (x86)\TeXstudio\dictionaries\rus).
 При этом "Язык по умолчанию" примет значение "russian_english". Жмем Ok.
 
+
+Для знакомства со средствами разметки и форматирования LaTeX рекомендуем к прочтению следующие руководства,
+доступные, в частности, на сайте "TeX в ЯрГУ" http://www.tex.uniyar.ac.ru
+1. И. Котельников, П. Чеботаев, LaTeX2e по-русски, 2004 год. http://www.tex.uniyar.ac.ru/doc/kotelnikovchebotaev2004b.pdf
+2. В. Сюткин, Справочник по командам LaTeX2e. http://www.nsc.ru/win/docs/TeX/LaTex2e/Text_in_LaTeX.pdf
+3. В. Сюткин, Русский язык в LaTeX2е. http://www.tex.uniyar.ac.ru/doc/Rus_in_LaTeX.pdf
+4. В. Сюткин, Набор математических формул в Latex2e. http://www.tex.uniyar.ac.ru/doc/Math_in_LaTeX.pdf
+5. В. Сюткин, Включение рисунков в LaTeX2e. http://www.tex.uniyar.ac.ru/doc/Graph_in_LaTeX.pdf
