@@ -1,2 +1,17 @@
-# diplom.cls
-LaTeX class for diplom typing in Russian (Yaroslavl State University)
+# diplom.cls 
+LaTeX class for diplom typing in Russian (Yaroslavl State University).
+Шаблон для написания дипломной работы и подготовки презентации в издательской системе LaTeX,
+с учетом требований, предъявляемых к выпускным квалификационным работам ЯрГУ им. П.Г. Демидова.
+
+Каталог содержит файлы:
+Installing.txt      -- инструкции по установке и настройке LaTeX под Windows
+Syutkin-manuals.zip -- руководства В. Сюткина для начинающих знакомство с системой LaTeX
+diplExample.tex     -- основной файл -- пример оформления дипломной работы
+diplExample.pdf     -- результат (компиляции файла diplExample.tex)
+diplom.cls          -- класс документа (содержит все основные настройки)
+appendix2.tex       -- пример файла с Приложением
+apple.jpg           -- пример картинки
+sort.cpp            -- пример исходного кода программы на C++
+presentation.tex    -- пример презентации дипломной работы
+presentation.pdf    -- результат (компиляции файла presentation.tex)
+presentation.cls    -- класс для презентации (содержит основные настройки презентации)
