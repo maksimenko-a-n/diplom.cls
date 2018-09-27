@@ -82,16 +82,16 @@
 		}{0pt}{\filright}
 		\titlespacing{\chapter}{0pt}{0pt}{*3.5}
 		% Добавляем слово Приложение к записям глав в Содержании
-		\titlecontents{chapter}% <section-type>
-			[0pt]% <left>
-			{\vspace{1em}\bfseries}% <above-code>
-			{\appendixname\ \thecontentslabel.\enspace}% <numbered-entry-format>
-			{}% <numberless-entry-format>
-			{\hfill\contentspage}% <filler-page-format>
+%		\titlecontents{chapter}% <section-type>
+%			[0pt]% <left>
+%			{\vspace{1em}\bfseries}% <above-code>
+%			{\appendixname\ \thecontentslabel.\enspace}% <numbered-entry-format>
+%			{}% <numberless-entry-format>
+%			{\hfill\contentspage}% <filler-page-format>
 			%[\vspace{2pt}]% <below-code>
 		% Добавляем слово Приложение к каждой записи в Содержании
-%		\let\addcontentslineold=\addcontentsline
-%		\renewcommand{\addcontentsline}[3]{\addcontentslineold{##1}{##2}{\appendixname~##3}}
+		\let\addcontentslineold=\addcontentsline
+		\renewcommand{\addcontentsline}[3]{\addcontentslineold{##1}{##2}{\appendixname~##3}}
 	}
 }
 
