@@ -1,3 +1,4 @@
+% !TeX encoding = windows-1251
 %% 
 %% This is file presentation.cls
 %% It is based on beamer.cls

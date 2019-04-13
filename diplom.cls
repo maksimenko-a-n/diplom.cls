@@ -1,3 +1,4 @@
+% !TeX encoding = windows-1251
 %% 
 %% This is file diplom.cls
 %% It is based on report.cls
