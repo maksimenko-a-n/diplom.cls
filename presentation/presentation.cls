@@ -46,7 +46,7 @@
 \definecolor{unicover}{rgb}{0.10,0.35,0.62} 
 \setbeamercolor{structure}{fg=unicover}
 % ƒобавл€ем логотип университета
-\pgfdeclareimage[height=1.5cm]{university-logo}{LogoYarSU.png}
+\pgfdeclareimage[height=1.5cm]{university-logo}{resources/img/LogoYarSU.png}
 \logo{\pgfuseimage{university-logo}}
 
 % ƒелим нижний колонтитул на три части: автор, название, число слайдов
