@@ -29,31 +29,18 @@
 
 % Формируем PDF с полноценными перекрестными ссылками
 \usepackage[unicode, pdfborder={0 0 0}, pdfstartview=FitV]{hyperref}
-
-% Часто используемые макросы
-\newcommand{\N}{\mathbb{N}}  % Множество натуральных чисел
-\newcommand{\Z}{\mathbb{Z}}  % Множество целых чисел
-\newcommand{\R}{\mathbb{R}}  % Множество действительных чисел
-\DeclareMathOperator{\sgn}{sgn} % Знак числа
-\DeclareMathOperator{\M}{\mathsf{M}} % Матожидание
-\newcommand{\from}{\colon} % Двоеточие в определении функции. Пример: $f \from \R \to \N$.
-% Заменяем англоязычные обозначения на русские
-\renewcommand{\le}{\leqslant}
-\renewcommand{\leq}{\leqslant}
-\renewcommand{\ge}{\geqslant}
-\renewcommand{\geq}{\geqslant}
-\renewcommand{\emptyset}{\varnothing}
-\renewcommand{\epsilon}{\varepsilon}
-
+\input{includes/macros.tex} % Основные макросы
+\newcommand*\lstinputpath[1]{\lstset{inputpath=#1}}
+\lstinputpath{resources/src} % Устанавливаем путь до файлов исходного кода
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 % Конец преамбулы
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-
 % Содержимое титульного листа
 
-%\LetterHead{Минобр...}
+
+\LetterHead{Министерство науки и высшего образования Российской Федерации\\Федеральное государственное бюджетное учреждение высшего образования\\<<Ярославский государственный университет им. П.Г Демидова>>}
 \Kafedra{Кафедра информатики}
 
 % Зав. кафедрой
@@ -77,8 +64,8 @@
 % Автор
 \Author{Студент группы ИТ-41БО}{И.\,И.~Иванов}
 
-%\City{Ярославль}
-%\Year{2017}
+\City{Ярославль}
+\Year{2019}
 
 
 % Создаем титульный лист
@@ -149,7 +136,7 @@
 % Рисунок
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=0.3\textwidth]{apple.jpg}
+	\includegraphics[width=0.3\textwidth]{resources/img/apple.jpg}
 	\caption{Название рисунка}
 	\label{fig:1} % Метка для ссылки в тексте
 \end{figure}
@@ -453,7 +440,7 @@ M = \begin{pmatrix}
 \lstinputlisting[style=cpp]{sort.cpp} 
 
 % Части вашего текста можно хранить в отдельных файлах (это особенно удобно для приложений) и включать их в основной файл с помощью команды \input{имя файла}
-\input{appendix2}
+\input{resources/addons/appendix2}
 
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
