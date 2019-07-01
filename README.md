@@ -6,13 +6,13 @@
 ***
 ### Структура репозитория:
 
- * [Installing.txt](./Installing.txt) -- инструкции по установке и настройке LaTeX под Windows;
+ * [Installing(Win).txt](./Installing(Win).txt) -- инструкции по установке и настройке LaTeX под Windows;
  * [bin](./bin)
    * [diplExample.pdf](./bin/diplExample.pdf) - пример собранной (pdf) версии дипломной работы
    * [presentation.pdf](./bin/presentation.pdf) - пример собранной (pdf) версии презентации
- * [manuals](./manuals)
-   * [Syutkin](./manuals/Syutkin)
-   * [Syutkin.zip](./manuals/Syutkin/Syutkin.zip) -- руководства В. Сюткина для начинающих знакомство с системой LaTeX;
+ * [addons](./addons)
+   * [Syutkin-manuals.zip](./addons/Syutkin-manuals.zip) -- руководства В. Сюткина для начинающих знакомство с системой LaTeX;
+   * [tree-md.sh](./addons/tree-md.sh)
  * [presentation](./presentation)
    * [resources](./presentation/resources)
      * [img](./presentation/resources/img)
