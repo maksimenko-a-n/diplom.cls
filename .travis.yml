@@ -1,0 +1,10 @@
+sudo:       required
+language:   generic
+services:   docker
+
+tex-config:
+- build-pattern=diplom/diplExample.tex,presentation/presentation.tex
+- packages=paratype, indentfirst, array, booktabs, tikz, listings, icomma, microtype, fontenc, babel, fontenc, inputenc, babel, titletoc, titlesec, tocbibind, caption, textcase
+
+script:
+- docker run --mount src=$TRAVIS_BUILD_DIR/,target=/repo,type=bind strauman/travis-latexbuild:smal
